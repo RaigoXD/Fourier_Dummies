@@ -1,8 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    
-    
-
-    
 
     document.getElementById('agregar').addEventListener("click", () => {
         let functionContainer = document.querySelector('.functionContainer')
@@ -78,14 +74,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     type: 'scatter'
                 })
             }).then(()=>{
-                Plotly.newPlot('plot', traces);
+                Plotly.newPlot('plot1', traces);
             })
-        })
+        })        
         
         const urlToCalculateFourier = 'http://127.0.0.1:5000/api/calculate-fourier'
 
         let period = document.querySelector(".getPeriod").value
-
+        var trace1 = null 
         fetch(urlToCalculateFourier + '?period=' + period, {
             method: 'POST',
             headers: {
@@ -100,6 +96,19 @@ document.addEventListener("DOMContentLoaded", function() {
             return response.json();
         }).then(data => {
             console.log(data)
+            trace1 = ({
+                x:data.tabulate.t_values,
+                y:data.tabulate.y_values,
+                mode: 'lines+markers',
+                type: 'scatter'
+            })
+            Plotly.newPlot('plot2', [trace1]);
+            aN.textContent = data.aN;
+            bN.textContent = data.bN
+            a0.textContent = data.a0
+            MathJax.typesetPromise([document.getElementById("aN")]);
+            MathJax.typesetPromise([document.getElementById("bN")]);
+            console.log(aN)
         })
     })
 });

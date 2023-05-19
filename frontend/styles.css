@@ -6,7 +6,7 @@ body{
     display: flex;
     align-items: center;
     height: 70px;
-    width: 100%;
+    width: auto;
     background-color: #999999;
     padding-left: 24px;
     margin-bottom: 20px;
@@ -165,9 +165,49 @@ input{
     height: 100%;
 }
 
-.mathml{
+.formula{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     border-radius: 10px;
     box-shadow: 4px 3px 20px 0px;
     height: 48%;
     width: 100%; 
+}
+
+.formulas-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.formulas-container > *{
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 20px;
+}
+
+.text-container{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #999999;
+    color: #fff;
+    font-weight: 400;
+    font-size: 24px;
+    border-radius: 10px;
+    margin-left: 24px;
+}
+
+.formula-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+}
+
+.texto{
+    display: flex;
+    justify-content: center;
+    font-size: 38px;
 }
