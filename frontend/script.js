@@ -54,10 +54,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         console.log(funtionCreated)
+
         const urlToTabulate = 'http://127.0.0.1:5000/api/utils/tabulate_function'
-
         let traces = []
-
+        
         funtionCreated.forEach(functionToTabulate => {
             fetch(urlToTabulate, {
                 method: 'POST',
@@ -80,6 +80,26 @@ document.addEventListener("DOMContentLoaded", function() {
             }).then(()=>{
                 Plotly.newPlot('plot', traces);
             })
+        })
+        
+        const urlToCalculateFourier = 'http://127.0.0.1:5000/api/calculate-fourier'
+
+        let period = document.querySelector(".getPeriod").value
+
+        fetch(urlToCalculateFourier + '?period=' + period, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(funtionCreated)
+
+        }).then(response => {
+            if (!response){
+                throw new Error('HTTP error ' + response.status);
+            }
+            return response.json();
+        }).then(data => {
+            console.log(data)
         })
     })
 });
