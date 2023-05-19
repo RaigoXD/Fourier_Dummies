@@ -6,28 +6,31 @@
 </head>
 <body>
     <div class="container" >
-        <div class="dataContainer">
-            <div class="titles">
-                <div style="grid-column-start: 1; width: auto;">Funcion</div>
-                <div style="grid-column-start: 2; width: auto">Superior</div>
-                <div style="grid-column-start: 3; width: auto">Inferior</div>
-            </div>
-            <div class="functionContainer">
-                <div class="function data1">
-                    <input class="getFunction" type="text">
-                    <input class="getUpValue" type="text">
-                    <input class="getDownValue" type="text">
+        <div class="card">
+            <div class="dataContainer">
+                <div class="titles">
+                    <div style="grid-column-start: 1; width: auto;">Funcion</div>
+                    <div style="grid-column-start: 2; width: auto">Superior</div>
+                    <div style="grid-column-start: 3; width: auto">Inferior</div>
+                </div>
+                <div class="functionContainer">
+                    <div class="function data1">
+                        <input class="getFunction" type="text">
+                        <input class="getUpValue" type="text">
+                        <input class="getDownValue" type="text">
+                    </div>
+                </div>
+                <div class="botones">
+                    <button id="calcular">
+                        Calcular
+                    </button>
+                    <button id="agregar">
+                        Agregar
+                    </button>
                 </div>
             </div>
-            <div class="botones">
-                <button id="calcular">
-                    Calcular
-                </button>
-                <button id="agregar">
-                    Agregar
-                </button>
-            </div>
         </div>
+        
         <canvas class="item item1" id="canvas" width="800" height="800"></canvas>
     </div>
   <script src="script.js"></script>

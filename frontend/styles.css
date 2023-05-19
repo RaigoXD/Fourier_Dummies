@@ -12,6 +12,13 @@ canvas {
     column-gap: 10px;
 }
 
+.card{
+    padding: 12px;
+    box-shadow: 0px 0px 20px 0px;
+    border-radius: 10px;
+    background-color: white;
+}
+
 .dataContainer {
     grid-column-start: 1;
     grid-row-start: 1;
@@ -19,9 +26,8 @@ canvas {
 
     display: flex;
     flex-direction: column;
+    gap: 12px;
 
-    border: 1px solid #000;
-    background-color: antiquewhite;
     padding-left: 10px;
     padding-top: 10px;
     padding-right: 5px;
@@ -31,32 +37,44 @@ canvas {
 .titles {
     display: grid;
     grid-template-columns: repeat(3,auto);
-    background-color: aliceblue;
 }
 
 div.titles div  {
-    border: 1px solid black;
     display: flex;
     justify-content: center;
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
     margin-bottom: 4px;
+    
 }
 
 .functionContainer {
     align-self: stretch;
     height: fit-content;
-    background-color: rebeccapurple;
 
 }
 
 .function {
-    border: 1px solid black;
     display: flex;
     justify-content: center;
+    gap: 3px;
+    margin-top: 10px;
+}
+
+.function > input{
+    box-shadow: 0px 0px 3px 0px;
+    border: none;
+    border-radius: 4px;
+    background: #e8e8e8;
+    transition: 0.3s;
 }
 
 .item1{
+    border-radius: 4px;
+    box-shadow: 0px 0px 20px 0px;
     grid-column-start: 2;
-    background-color: aqua;
+    background-color: #e8e8e8;
 }
 
 
@@ -75,4 +93,29 @@ div.titles div  {
 .botones {
     display: flex;
     justify-content: space-between;
+}
+
+.botones > button{
+    appearance: none;
+    background-color: #001942;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
 }
