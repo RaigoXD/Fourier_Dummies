@@ -17,7 +17,7 @@ class FunctionOperations:
         lower_limit = float(sympy.simplify(function.lower_limit))
         print(function_sympy, upper_limit, lower_limit)
         
-        values_t = [i for i in np.arange(lower_limit,upper_limit, 0.1)]
+        values_t = [i for i in np.arange(lower_limit,upper_limit+0.1, 0.1)]
         y_values = [
             float(function_sympy.evalf(subs={t : t_value}))
             for t_value in values_t

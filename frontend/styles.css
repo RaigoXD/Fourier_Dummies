@@ -1,20 +1,37 @@
-
+body{
+    margin: 0;
+}
 
 canvas {
     border: 2px solid #000;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    background-color: aliceblue;
+    margin-bottom: 20px;
+}
+
+.header > p{
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 32px;
+    font-weight: 600;
 }
 
 
 .container {
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    grid-template-rows: 1fr 40px;
+    grid-template-rows: 1fr 1fr;
     column-gap: 10px;
 }
 
 .card{
     padding: 12px;
-    box-shadow: 0px 0px 20px 0px;
+    box-shadow: 4px 3px 20px 0px;
     border-radius: 10px;
     background-color: white;
 }
@@ -72,7 +89,7 @@ div.titles div  {
 
 .item1{
     border-radius: 4px;
-    box-shadow: 0px 0px 20px 0px;
+    /* box-shadow: 0px 0px 20px 0px; */
     grid-column-start: 2;
     background-color: #e8e8e8;
 }
@@ -97,7 +114,7 @@ div.titles div  {
 
 .botones > button{
     appearance: none;
-    background-color: #001942;
+    background-color: #030042;
     border: 1px solid rgba(27, 31, 35, .15);
     border-radius: 6px;
     box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
@@ -118,4 +135,14 @@ div.titles div  {
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap;
+}
+
+.plot-container{
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

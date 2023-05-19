@@ -2,9 +2,13 @@
 <html>
 <head>
   <title>Plano Cartesiano</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="header">
+        <p>Calculadora Fourier Para Dummies</p>
+    </div>
     <div class="container" >
         <div class="card">
             <div class="dataContainer">
@@ -30,8 +34,9 @@
                 </div>
             </div>
         </div>
-        
-        <canvas class="item item1" id="canvas" width="800" height="800"></canvas>
+        <div class="plot-container">
+            <div id="plot"></div>
+        </div>        
     </div>
   <script src="script.js"></script>
 </body>

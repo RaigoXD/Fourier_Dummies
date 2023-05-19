@@ -1,34 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    const width = canvas.width;
-    const height = canvas.height;
-    console.log("width: " + width + " height: " + height);
-  
-    // Función para dibujar el plano cartesiano
-    function drawCartesianPlane() {
-      // Dibujar el eje x
-      ctx.beginPath();
-      ctx.moveTo(0, height / 2);
-      ctx.lineTo(width, height / 2);
-      ctx.stroke();
-  
-      // Dibujar el eje y
-      ctx.beginPath();
-      ctx.moveTo(width / 2, 0);
-      ctx.lineTo(width / 2, height);
-      ctx.stroke();
-    }
-  
-    // Función para dibujar un punto en el plano cartesiano
-    function drawPoint(x, y, color) {
-        ctx.fillStyle = color;
-        ctx.fillRect(x + width / 2, -y + height / 2, 4, 4);
-    }
-  
-    // Ejemplo de uso: dibujar un punto en las coordenadas (50, 100) de color rojo
-    drawCartesianPlane();
-    drawPoint(4, 100, "red");
+    
+    var trace1 = {
+        x: [1, 2, 3, 4, 5],
+        y: [10, 15, 13, 17, 10],
+        mode: 'markers',
+        type: 'scatter'
+      };
+
+    var data = [trace1];
+
+    
 
     document.getElementById('agregar').addEventListener("click", () => {
         let functionContainer = document.querySelector('.functionContainer')
@@ -65,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
     var funtionCreated = []
-    var tabulations = []
 
     document.getElementById('calcular').addEventListener("click", () => {
         let functionContainer = document.querySelector('.functionContainer')
@@ -83,6 +63,8 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(funtionCreated)
         const urlToTabulate = 'http://127.0.0.1:5000/api/utils/tabulate_function'
 
+        let traces = []
+
         funtionCreated.forEach(functionToTabulate => {
             fetch(urlToTabulate, {
                 method: 'POST',
@@ -94,7 +76,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (!response){
                     throw new Error('HTTP error ' + response.status);
                 }
-                console.log(response)
+                return response.json()
+            }).then(data => {
+                traces.push({
+                    x:data.t_values,
+                    y:data.y_values,
+                    mode: 'lines+markers',
+                    type: 'scatter'
+                })
+            }).then(()=>{
+                Plotly.newPlot('plot', traces);
             })
         })
     })
