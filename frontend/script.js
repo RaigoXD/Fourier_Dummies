@@ -1,13 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    var trace1 = {
-        x: [1, 2, 3, 4, 5],
-        y: [10, 15, 13, 17, 10],
-        mode: 'markers',
-        type: 'scatter'
-      };
-
-    var data = [trace1];
+    
 
     
 
@@ -39,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function() {
         funcionInferior.setAttribute('type', 'text');
 
         divContainer.appendChild(funcionInput)
-        divContainer.appendChild(funcionSuperior)
         divContainer.appendChild(funcionInferior)
+        divContainer.appendChild(funcionSuperior)
 
         functionContainer.appendChild(divContainer)
     })
