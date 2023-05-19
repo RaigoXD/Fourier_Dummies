@@ -2,31 +2,33 @@ body{
     margin: 0;
 }
 
-canvas {
-    border: 2px solid #000;
-}
-
 .header{
     display: flex;
     align-items: center;
     height: 70px;
     width: 100%;
-    background-color: aliceblue;
+    background-color: #999999;
+    padding-left: 24px;
     margin-bottom: 20px;
 }
 
 .header > p{
     font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 300;
+    color: white;
 }
 
 
 .container {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: 1fr 1fr;
-    column-gap: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.container > *{
+    height: 85vh;
 }
 
 .card{
@@ -34,6 +36,7 @@ canvas {
     box-shadow: 4px 3px 20px 0px;
     border-radius: 10px;
     background-color: white;
+    flex-basis: 33%;
 }
 
 .dataContainer {
@@ -43,7 +46,7 @@ canvas {
 
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
 
     padding-left: 10px;
     padding-top: 10px;
@@ -60,7 +63,7 @@ div.titles div  {
     display: flex;
     justify-content: center;
     font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     margin-bottom: 4px;
     
@@ -74,37 +77,18 @@ div.titles div  {
 
 .function {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     gap: 3px;
     margin-top: 10px;
 }
 
 .function > input{
+    width: 30%;
     box-shadow: 0px 0px 3px 0px;
     border: none;
     border-radius: 4px;
     background: #e8e8e8;
     transition: 0.3s;
-}
-
-.item1{
-    border-radius: 4px;
-    /* box-shadow: 0px 0px 20px 0px; */
-    grid-column-start: 2;
-    background-color: #e8e8e8;
-}
-
-
-.item2{
-    grid-row-start: 2; 
-    grid-column-start: 2;
-    
-    background-color: darkkhaki;
-    border: 2px solid #000;
-    border-top: 2px solid white;
-
-    display: flex;
-    justify-content: center;
 }
 
 .botones {
@@ -137,12 +121,17 @@ div.titles div  {
     white-space: nowrap;
 }
 
-.plot-container{
-    grid-row-start: 1;
-    grid-row-end: 3;
-    grid-column-start: 2;
-    background-color: red;
+
+.container2{
+    flex-basis: 65%;
+}
+.plot_container{
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 4px 3px 20px 0px;
+    height: 50%;
+    width: 100%;
+    background-color: white;   
 }
