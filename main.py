@@ -63,7 +63,7 @@ def calculating_f_x(expression_aN,expression_bN, total_a0, w0):
     f = (
         (total_a0 / 2) + sympy.summation(    
         expression_aN + expression_bN, 
-        (n, 1, 10)
+        (n, 1, 70)
         )
     )
     # calculating the tabulation

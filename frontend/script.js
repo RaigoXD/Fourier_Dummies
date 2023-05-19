@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
     var funtionCreated = []
+    var tabulations = []
 
     document.getElementById('calcular').addEventListener("click", () => {
         let functionContainer = document.querySelector('.functionContainer')
@@ -73,12 +74,28 @@ document.addEventListener("DOMContentLoaded", function() {
         functionContainer.childNodes.forEach(element => {
             if (element.nodeType === 1){
                 funtionCreated.push({
-                    funcion : element.querySelector(".getFunction").value,
-                    limite_superior : element.querySelector(".getUpValue").value,
-                    limite_inferior : element.querySelector(".getDownValue").value,
+                    function : element.querySelector(".getFunction").value,
+                    upper_limit : element.querySelector(".getUpValue").value,
+                    lower_limit : element.querySelector(".getDownValue").value,
                 })
             }
         })
         console.log(funtionCreated)
+        const urlToTabulate = 'http://127.0.0.1:5000/api/utils/tabulate_function'
+
+        funtionCreated.forEach(functionToTabulate => {
+            fetch(urlToTabulate, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(functionToTabulate)
+            }).then(response => {
+                if (!response){
+                    throw new Error('HTTP error ' + response.status);
+                }
+                console.log(response)
+            })
+        })
     })
 });
