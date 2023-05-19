@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # routes
 from backend.routes.index import function_controller
+from backend.routes.index import fourier_controller
 # from app.routes.index import likes
 
 def get_application() -> FastAPI:
@@ -26,7 +27,7 @@ def get_application() -> FastAPI:
     )
 
     application.include_router(function_controller, prefix="/api/utils")
-    # application.include_router(likes, prefix="/crud_likes")
+    application.include_router(fourier_controller, prefix="/api")
 
     application.add_middleware(
         CORSMiddleware,
