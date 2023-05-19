@@ -1,0 +1,78 @@
+
+
+canvas {
+    border: 2px solid #000;
+}
+
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 1fr 40px;
+    column-gap: 10px;
+}
+
+.dataContainer {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #000;
+    background-color: antiquewhite;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 5px;
+}
+
+
+.titles {
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    background-color: aliceblue;
+}
+
+div.titles div  {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.functionContainer {
+    align-self: stretch;
+    height: fit-content;
+    background-color: rebeccapurple;
+
+}
+
+.function {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.item1{
+    grid-column-start: 2;
+    background-color: aqua;
+}
+
+
+.item2{
+    grid-row-start: 2; 
+    grid-column-start: 2;
+    
+    background-color: darkkhaki;
+    border: 2px solid #000;
+    border-top: 2px solid white;
+
+    display: flex;
+    justify-content: center;
+}
+
+.botones {
+    display: flex;
+    justify-content: space-between;
+}
