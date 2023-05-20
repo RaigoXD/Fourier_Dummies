@@ -49,9 +49,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 })
             }
         })
-        console.log(funtionCreated)
 
-        const urlToTabulate = 'http://127.0.0.1:5000/api/utils/tabulate_function'
+        const urlToTabulate = 'http://0.0.0.0:5000/api/utils/tabulate_function'
         let traces = []
         
         funtionCreated.forEach(functionToTabulate => {
@@ -77,12 +76,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 Plotly.newPlot('plot1', traces);
             })
         })        
-        
-        const urlToCalculateFourier = 'http://127.0.0.1:5000/api/calculate-fourier'
+
+        const urlToCalculateFourier = 'http://0.0.0.0:5000/api/calculate-fourier'
 
         let period = document.querySelector(".getPeriod").value
+        let n_value = document.querySelector(".getN").value
+        console.log(n_value)
         var trace1 = null 
-        fetch(urlToCalculateFourier + '?period=' + period, {
+        fetch(urlToCalculateFourier + '?period=' + period + '&n=' + n_value, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -108,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function() {
             a0.textContent = data.a0
             MathJax.typesetPromise([document.getElementById("aN")]);
             MathJax.typesetPromise([document.getElementById("bN")]);
-            console.log(aN)
         })
     })
 });

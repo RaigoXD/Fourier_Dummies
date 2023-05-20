@@ -17,6 +17,7 @@ fourier_controller = APIRouter(tags=["Fourier Function"])
 )
 def tabulate_function(
     functions: List[Function],
-    period: str
+    period: str,
+    n:int
 ):
-    return Fourier.calculate_fourier_dommies(functions, period)
+    return Fourier.calculate_fourier_dommies(functions, period, n)

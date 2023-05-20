@@ -6,7 +6,6 @@ import numpy as np
 from typing import List
 
 
-
 #schemes
 from backend.schemes.schemes import Function 
 
@@ -58,7 +57,7 @@ def obtaining_bN(expressions_sympy, limits, periodo_T, w0):
     expression_bN = sympy.simplify(expression_bN)
     return expression_bN
 
-def calculating_f_x(expression_aN,expression_bN, total_a0, w0):
+def calculating_f_x(expression_aN,expression_bN, total_a0, w0, n_value):
     n = sympy.symbols('n')
     t = sympy.symbols('t')
     # multiplying an and bn by cos(nwt) and sin(nwt) respectively
@@ -68,7 +67,7 @@ def calculating_f_x(expression_aN,expression_bN, total_a0, w0):
     f = (
         (total_a0 / 2) + sympy.summation(    
         expression_aN + expression_bN, 
-        (n, 1, 50)
+        (n, 1, n_value)
         )
     )
     # calculating the tabulation
@@ -81,7 +80,7 @@ def calculating_f_x(expression_aN,expression_bN, total_a0, w0):
 
 class Fourier:
 
-    def calculate_fourier_dommies(functions: List[Function], period: str):
+    def calculate_fourier_dommies(functions: List[Function], period: str, n:int):
         # Calc w
         w0 = 2*pi / sympy.simplify(period)
 
@@ -94,7 +93,7 @@ class Fourier:
             limits.append(
                 [sympy.simplify(function.upper_limit),sympy.simplify(function.lower_limit)]
             )
-        
+
         # calculating a0
         total_a0 = obtaining_a0(expressions_sympy,limits,period)
         expression_aN = obtaining_aN(expressions_sympy, limits, period, w0)
@@ -109,9 +108,9 @@ class Fourier:
         sympy.pretty_print(expression_aN, use_unicode=True)
         print("\n\n")
         sympy.pretty_print(expression_bN, use_unicode=True)
-        
-        t_values, y_values = calculating_f_x(expression_aN, expression_bN, total_a0, w0)
-        
+
+        t_values, y_values = calculating_f_x(expression_aN, expression_bN, total_a0, w0, n)
+
         return {
             "a0": total_a0,
             "aN": expresssion_aN_mathMl,
