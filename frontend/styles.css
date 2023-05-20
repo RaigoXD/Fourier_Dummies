@@ -38,6 +38,12 @@ body{
     background-color: white;
     flex-basis: 33%;
 }
+.inputsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 
 .period{
     display: flex;
@@ -50,6 +56,22 @@ body{
 }
 
 .period > p{
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.n-sumatoria{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 5px;
+    margin-bottom: 12px;
+}
+
+.n-sumatoria > p{
     font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
     font-size: 16px;
     font-weight: 600;
