@@ -2,8 +2,12 @@
 import sympy
 from sympy import cos, sin
 from sympy import pi
-import matplotlib.pyplot as plt
+import numpy as np
+from typing import List
 
+
+#schemes
+from backend.schemes.schemes import Function 
 
 def obtaining_a0(expressions_sympy, limits, periodo_T):
     # getting a0
@@ -13,7 +17,7 @@ def obtaining_a0(expressions_sympy, limits, periodo_T):
         total_a0 += sympy.integrate(sympy_expression, (t, limits[index][1], limits[index][0]))
     total_a0 = total_a0 * 2 / sympy.simplify(periodo_T)
 
-    return total_a0
+    return float(total_a0)
 
 def obtaining_aN(expressions_sympy, limits, periodo_T, w0):
     # getting aN
@@ -53,7 +57,7 @@ def obtaining_bN(expressions_sympy, limits, periodo_T, w0):
     expression_bN = sympy.simplify(expression_bN)
     return expression_bN
 
-def calculating_f_x(expression_aN,expression_bN, total_a0, w0):
+def calculating_f_x(expression_aN,expression_bN, total_a0, w0, n_value):
     n = sympy.symbols('n')
     t = sympy.symbols('t')
     # multiplying an and bn by cos(nwt) and sin(nwt) respectively
@@ -63,46 +67,56 @@ def calculating_f_x(expression_aN,expression_bN, total_a0, w0):
     f = (
         (total_a0 / 2) + sympy.summation(    
         expression_aN + expression_bN, 
-        (n, 1, 70)
+        (n, 1, n_value)
         )
     )
     # calculating the tabulation
     t_values = [i/30 for i in range(-100,100,1)]
-    y_values = [f.evalf(subs={t:t_value}) for t_value in t_values]
+    y_values = [float(f.evalf(subs={t:t_value})) for t_value in t_values]
 
-    plt.plot(t_values, y_values)
-    plt.xlabel('t')
-    plt.ylabel('f(t)')
-    plt.title('Gráfica')
-    plt.grid(True)
-    plt.show()
+    
+    return t_values,y_values
 
 
+class Fourier:
 
-if __name__ == '__main__': 
-    periodo_T = input("Ingresa el periodo\n->")
-    # Calc w
-    w0 = 2*pi / sympy.simplify(periodo_T)
-    # Getting the functions from keyboard 
-    input_user = input("Ingresa la lista de las funciones, separadas por ,\n->")
-    expressions = input_user.split(",")
-    # expressions_sympy
-    expressions_sympy = [sympy.simplify(expression) for expression in expressions]
+    def calculate_fourier_dommies(functions: List[Function], period: str, n:int):
+        # Calc w
+        w0 = 2*pi / sympy.simplify(period)
 
-    # obtaining limits 
-    limits = []
-    for expression in expressions:
-        print(expression)
-        limits.append(
-            [sympy.simplify(input("limiteSuperior->")),sympy.simplify(input("limiteInferior->"))]
-        )
-    # calculating a0
-    total_a0 = obtaining_a0(expressions_sympy,limits,periodo_T)
-    expression_aN = obtaining_aN(expressions_sympy, limits, periodo_T, w0)
-    expression_bN = obtaining_bN(expressions_sympy, limits, periodo_T, w0)
+        expressions_sympy = []
+        limits = []
+        
+        # obtaining the simbolic expressions
+        for function in functions:
+            expressions_sympy.append(sympy.simplify(function.function))
+            limits.append(
+                [sympy.simplify(function.upper_limit),sympy.simplify(function.lower_limit)]
+            )
 
-    print(f"\nEl resultado de a0 es: {total_a0} <--\n\n")
-    sympy.pretty_print(expression_aN, use_unicode=True)
-    print("\n\n")
-    sympy.pretty_print(expression_bN, use_unicode=True)
-    calculating_f_x(expression_aN,expression_bN, total_a0, w0)
+        # calculating a0
+        total_a0 = obtaining_a0(expressions_sympy,limits,period)
+        expression_aN = obtaining_aN(expressions_sympy, limits, period, w0)
+        expression_bN = obtaining_bN(expressions_sympy, limits, period, w0)
+
+        expresssion_aN_mathMl = sympy.latex(expression_aN)
+        expresssion_bN_mathMl = sympy.latex(expression_bN)
+
+        print(expresssion_aN_mathMl)
+
+        print(f"\nEl resultado de a0 es: {total_a0} <--\n\n")
+        sympy.pretty_print(expression_aN, use_unicode=True)
+        print("\n\n")
+        sympy.pretty_print(expression_bN, use_unicode=True)
+
+        t_values, y_values = calculating_f_x(expression_aN, expression_bN, total_a0, w0, n)
+
+        return {
+            "a0": total_a0,
+            "aN": expresssion_aN_mathMl,
+            "bN": expresssion_bN_mathMl,
+            "tabulate": {
+                "t_values": t_values,
+                "y_values": y_values
+            }
+        }

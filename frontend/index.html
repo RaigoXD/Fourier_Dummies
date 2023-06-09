@@ -1,34 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Plano Cartesiano</title>
-  <link rel="stylesheet" href="styles.css">
+    <title>Plano Cartesiano</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="header">
+        <p>Calculadora Fourier Para Dummies</p>
+    </div>
     <div class="container" >
-        <div class="dataContainer">
-            <div class="titles">
-                <div style="grid-column-start: 1; width: auto;">Funcion</div>
-                <div style="grid-column-start: 2; width: auto">Superior</div>
-                <div style="grid-column-start: 3; width: auto">Inferior</div>
-            </div>
-            <div class="functionContainer">
-                <div class="function data1">
-                    <input class="getFunction" type="text">
-                    <input class="getUpValue" type="text">
-                    <input class="getDownValue" type="text">
+        <div class="card">
+            <div class="inputsContainer">
+                <div class="variable">
+                    <p>Periodo</p>
+                    <input class="getPeriod" type="text">
+                </div>
+                <div class="variable">
+                    <p>N-Sumatoria</p>
+                    <input class="getN" type="text">
                 </div>
             </div>
-            <div class="botones">
-                <button id="calcular">
-                    Calcular
-                </button>
-                <button id="agregar">
-                    Agregar
-                </button>
+            <div class="dataContainer">
+                <div class="titles">
+                    <div style="grid-column-start: 1; width: auto;">Funcion</div>
+                    <div style="grid-column-start: 2; width: auto">Inferior</div>
+                    <div style="grid-column-start: 3; width: auto">Superior</div>
+                </div>
+                <div class="functionContainer">
+                    <div class="function data1">
+                        <input class="getFunction" type="text">
+                        <input class="getDownValue" type="text">
+                        <input class="getUpValue" type="text">                        
+                    </div>
+                </div>
+                <div class="botones">
+                    <button id="agregar">
+                        Agregar
+                    </button>
+                    <button id="calcular">
+                        Calcular
+                    </button>
+                </div>
             </div>
         </div>
-        <canvas class="item item1" id="canvas" width="800" height="800"></canvas>
+        <div class="container2">
+            <div class="plot_container">
+                <div id="plot1"></div>
+                <div id="plot2"></div>
+            </div>
+            <div class="formula">
+                <div class="formulas-container">
+                    <div class="text-container">
+                        <p>An</p>
+                    </div>
+                    <div class="formula-container">
+                        <div id="aN"></div>
+                    </div>
+                </div>
+                <div class="formulas-container">
+                    <div class="text-container">
+                        <p>Bn</p>
+                    </div>
+                    <div class="formula-container">
+                        <div id="bN"></div>
+                    </div>
+                </div>
+                <div class="formulas-container">
+                    <div class="text-container">
+                        <p>A0</p>
+                    </div>
+                    <div class="formula-container texto">
+                        <div id="a0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
   <script src="script.js"></script>
 </body>

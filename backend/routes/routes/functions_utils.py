@@ -17,5 +17,5 @@ function_controller = APIRouter(tags=["Controller Functions"])
 def tabulate_function(
     function: Function
 ):
-    FunctionOperations.tabulate_function(function)
-    return function
+    print(function)
+    return FunctionOperations.tabulate_function(function)

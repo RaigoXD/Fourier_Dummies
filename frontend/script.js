@@ -1,34 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    const width = canvas.width;
-    const height = canvas.height;
-    console.log("width: " + width + " height: " + height);
-  
-    // Función para dibujar el plano cartesiano
-    function drawCartesianPlane() {
-      // Dibujar el eje x
-      ctx.beginPath();
-      ctx.moveTo(0, height / 2);
-      ctx.lineTo(width, height / 2);
-      ctx.stroke();
-  
-      // Dibujar el eje y
-      ctx.beginPath();
-      ctx.moveTo(width / 2, 0);
-      ctx.lineTo(width / 2, height);
-      ctx.stroke();
-    }
-  
-    // Función para dibujar un punto en el plano cartesiano
-    function drawPoint(x, y, color) {
-        ctx.fillStyle = color;
-        ctx.fillRect(x + width / 2, -y + height / 2, 4, 4);
-    }
-  
-    // Ejemplo de uso: dibujar un punto en las coordenadas (50, 100) de color rojo
-    drawCartesianPlane();
-    drawPoint(4, 100, "red");
 
     document.getElementById('agregar').addEventListener("click", () => {
         let functionContainer = document.querySelector('.functionContainer')
@@ -58,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
         funcionInferior.setAttribute('type', 'text');
 
         divContainer.appendChild(funcionInput)
-        divContainer.appendChild(funcionSuperior)
         divContainer.appendChild(funcionInferior)
+        divContainer.appendChild(funcionSuperior)
 
         functionContainer.appendChild(divContainer)
     })
@@ -73,12 +43,72 @@ document.addEventListener("DOMContentLoaded", function() {
         functionContainer.childNodes.forEach(element => {
             if (element.nodeType === 1){
                 funtionCreated.push({
-                    funcion : element.querySelector(".getFunction").value,
-                    limite_superior : element.querySelector(".getUpValue").value,
-                    limite_inferior : element.querySelector(".getDownValue").value,
+                    function : element.querySelector(".getFunction").value,
+                    upper_limit : element.querySelector(".getUpValue").value,
+                    lower_limit : element.querySelector(".getDownValue").value,
                 })
             }
         })
-        console.log(funtionCreated)
+
+        const urlToTabulate = 'http://0.0.0.0:5000/api/utils/tabulate_function'
+        let traces = []
+        
+        funtionCreated.forEach(functionToTabulate => {
+            fetch(urlToTabulate, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(functionToTabulate)
+            }).then(response => {
+                if (!response){
+                    throw new Error('HTTP error ' + response.status);
+                }
+                return response.json()
+            }).then(data => {
+                traces.push({
+                    x:data.t_values,
+                    y:data.y_values,
+                    mode: 'lines+markers',
+                    type: 'scatter'
+                })
+            }).then(()=>{
+                Plotly.newPlot('plot1', traces);
+            })
+        })        
+
+        const urlToCalculateFourier = 'http://0.0.0.0:5000/api/calculate-fourier'
+
+        let period = document.querySelector(".getPeriod").value
+        let n_value = document.querySelector(".getN").value
+        console.log(n_value)
+        var trace1 = null 
+        fetch(urlToCalculateFourier + '?period=' + period + '&n=' + n_value, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(funtionCreated)
+
+        }).then(response => {
+            if (!response){
+                throw new Error('HTTP error ' + response.status);
+            }
+            return response.json();
+        }).then(data => {
+            console.log(data)
+            trace1 = ({
+                x:data.tabulate.t_values,
+                y:data.tabulate.y_values,
+                mode: 'lines+markers',
+                type: 'scatter'
+            })
+            Plotly.newPlot('plot2', [trace1]);
+            aN.textContent = data.aN;
+            bN.textContent = data.bN
+            a0.textContent = data.a0
+            MathJax.typesetPromise([document.getElementById("aN")]);
+            MathJax.typesetPromise([document.getElementById("bN")]);
+        })
     })
 });
